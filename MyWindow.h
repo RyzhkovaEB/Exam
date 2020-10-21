@@ -13,6 +13,10 @@
 // Объявление класса MyWindow как потомка Window
 class MyWindow: public Window
 {
+	double _houseWidth;
+	double _houseLength;
+	double _houseHeight;
+
 public:
 	static constexpr int DEFAULT_WIDTH = 800;
 	static constexpr int DEFAULT_HEIGHT = 600;
@@ -20,12 +24,11 @@ public:
 protected:
 	double _angle; // угол поворота
 	double _eye_level; // высота уровня глаз
-	double _houseHeight;
-	double _houseWidth;
-	double _houseLength;
+	bool _isHeight = false; // увеличивать высоту
+	bool _isWidth = false; // увеличивать ширину
+	bool _isLength = false; // увеличивать длину
 
 public:
-
 
 	// Конструктор класса ExampleWindow
 	MyWindow(

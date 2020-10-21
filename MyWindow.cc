@@ -17,6 +17,9 @@ MyWindow::MyWindow(int width, int height)//создание окна, размеры окна
 {
 	_angle = 0.; // угол поворота
 	_eye_level = 0.;// высота уровня глаз
+	_houseWidth = 1.;
+	_houseLength = 1.;
+	_houseHeight = 1.;
 }
 
 static const float s_material_red[4]     { 1.f, 0.f, 0.f, 1.f };//задаются цвета для плоскости, красный
@@ -49,15 +52,7 @@ void MyWindow::render()//отрисовка окна
 
 	glRotated(_angle, 0., 0., 1.); //поворот вокруг точки  (0,0,1) на угол
 
-	if (_isHeight) {
-		glScaled(1.,1.,2.);
-	}
-	if (_isWidth) {
-		glScaled(1.,2.,1.);
-	}
-	if (_isLength) {
-		glScaled(2.,1.,1.);
-	}
+	glScaled(_houseWidth, _houseLength, _houseHeight);
 
 	glBegin(GL_QUADS); //(Функция библиотеки OpenGL) мы определяем, что будем рисовать. Кажется, здесь четверня названо
 
@@ -122,11 +117,7 @@ void MyWindow::render()//отрисовка окна
 
 void MyWindow::handle_logic() //метод обработки логики, потомок Window
 {
-//	_angle += 1.10.; //
-//	if (_angle >= 360.)
-//		_angle -= 360.;
-//
-//	_eye_level = sin(_angle / 180. * Pi);
+
 }
 void MyWindow::handle_keys(const Uint8 * keys) //метод обработки логики, потомок Window
 {
@@ -137,6 +128,7 @@ void MyWindow::handle_keys(const Uint8 * keys) //метод обработки логики, потомок
 
 			_eye_level = sin(_angle / 180. * Pi);
 	}
+
 	if (keys[SDL_SCANCODE_RIGHT]) {
 		_angle += 1/10.;
 			if (_angle >= 360.)
@@ -145,13 +137,28 @@ void MyWindow::handle_keys(const Uint8 * keys) //метод обработки логики, потомок
 			_eye_level = sin(_angle / 180. * Pi);
 
 	}
+
 	if (keys[SDL_SCANCODE_H]) {
-		_isHeight = true;
+		_houseHeight = _houseHeight + 1. / 1000.;
+	} else {
+		if (_houseHeight > 1.) {
+			_houseHeight = _houseHeight - 1. / 1000.;
+		}
 	}
+
 	if (keys[SDL_SCANCODE_W]) {
-		_isWidth = true;
+		_houseWidth = _houseWidth + 1. / 1000.;
+	} else {
+		if (_houseWidth > 1.) {
+			_houseWidth = _houseWidth - 1. / 1000.;
+		}
 	}
+
 	if (keys[SDL_SCANCODE_L]) {
-		_isLength = true;
+		_houseLength = _houseLength + 1. / 1000.;
+	} else {
+		if (_houseLength > 1.) {
+			_houseLength = _houseLength - 1. / 1000.;
+		}
 	}
 }
