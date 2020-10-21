@@ -20,11 +20,12 @@ public:
 protected:
 	double _angle; // угол поворота
 	double _eye_level; // высота уровня глаз
-	bool _isHeight = false; // увеличивать высоту
-	bool _isWidth = false; // увеличивать ширину
-	bool _isLength = false; // увеличивать длину
+	double _houseHeight;
+	double _houseWidth;
+	double _houseLength;
 
 public:
+
 
 	// Конструктор класса ExampleWindow
 	MyWindow(
